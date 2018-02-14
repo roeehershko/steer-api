@@ -5,12 +5,17 @@ import {
     MiddlewaresConsumer,
     RequestMethod,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
+
+import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { AuthController } from './auth.controller';
+import {UserSchema} from "../user/schemas/users";
+import {MongooseModule} from "@nestjs/mongoose";
+import {CryptoService} from "./services/crypto.service";
 
 @Module({
-    components: [AuthService, JwtStrategy],
+    imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
+    components: [AuthService, JwtStrategy, CryptoService],
     controllers: [AuthController],
 })
 export class AuthModule implements NestModule {

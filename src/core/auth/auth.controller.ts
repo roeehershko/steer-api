@@ -1,5 +1,5 @@
-import { Controller, Post, HttpStatus, HttpCode, Get } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import {Controller, Post, HttpStatus, HttpCode, Get, Body, HttpException} from '@nestjs/common';
+import { AuthService } from './services/auth.service';
 
 @Controller('auth')
 export class AuthController {
@@ -7,8 +7,15 @@ export class AuthController {
 
     @Post('token')
     @HttpCode(HttpStatus.OK)
-    public async createToken() {
-        return await this.authService.createToken();
+    public async createToken(@Body() data) {
+        let token = await this.authService.createToken(data);
+
+        if (token) {
+            return token
+        }
+        else {
+            throw new HttpException('bad credentials', HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get('authorized')

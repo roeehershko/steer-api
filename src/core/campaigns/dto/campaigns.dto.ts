@@ -7,10 +7,6 @@ export class CreateCampaignDto {
     @MaxLength(100)
     readonly name: String;
 
-    @IsString()
-    @MinLength(4)
-    @MaxLength(18)
-    readonly code: String;
 
     @IsNumber()
     @MinLength(0)

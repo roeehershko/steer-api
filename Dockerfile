@@ -1,19 +1,27 @@
 # Set the base image to Ubuntu
 FROM node:latest
 
-# Set working directory and add project files
+RUN echo 151.101.16.162 registry.npmjs.org >> /etc/hosts
+RUN echo 192.30.253.113 github.com >> /etc/hosts
+RUN echo 104.192.143.1 bitbucket.org >> /etc/hosts
+RUN echo 87.98.253.214 packagist.org >> /etc/hosts
+
+# Install nodemon
+RUN yarn global add nodemon
+# Install packages using Yarn
+ADD ./package.json /tmp/package.json
+RUN cd /tmp && yarn
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+
+
+ENV NODE_ENV "development"
+
+# Define working directory
 WORKDIR /app
-ADD ./ /app
+ADD . /app
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port
+EXPOSE  3002
 
-# Set enviroments
-ENV MONGO_URL 'mongodb://159.89.108.85:27017/predix'
-ENV PORT 3000
-
-# Install NPM dependecies with Yarn
-#RUN npm install
-RUN npm run prestart:prod
-RUN npm install -g nodemon
-CMD ['npm', 'run', 'start:prod']
+# Run app using nodemon
+CMD ["npm", "run", "start:watch"]

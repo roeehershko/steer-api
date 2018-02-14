@@ -1,44 +1,43 @@
 import { Document } from 'mongoose';
 
-export enum RoleTypes { Country = 1, DayOfWeek = 2, HourOfDay = 3, DevicePrice = 4 }
-
-export interface Lander {
-    name: String,
-    url: String
-}
+export enum SplitTypes { Country = 1 }
 
 export interface SplitOptions {
-    equals?: String;
-    contains?: String;
+    equals?: string;
+    contains?: string;
     gt?: [number, Date];
     lt?: [number, Date];
-    in?: String[];
+    in?: any[];
 }
 
 export interface Split {
-    type: RoleTypes
+    type: SplitTypes
     options: SplitOptions
 }
 
-export interface Endpoint {
-    lander: Lander,
-    splits: Split[]
-    weight: Number
+export interface Lander {
+    name: string,
+    url: string
+    weight: number
 }
 
 export interface Source {
-    name: String,
+    name: string,
+    code: string,
+    costs: {
+        [key: string]: number
+    }
 }
 
 export interface Country {
-    name: String;
-    iso2: String
+    name: string;
+    iso2: string
 }
 
 export interface Campaign extends Document {
-    name: String,
-    slug: String,
-    endpoints?: Endpoint[],
+    name?: string,
+    slug?: string,
+    landers?: Lander[],
     sources?: Source[],
-    countries?: Country[]
+    // countries?: Country[]
 }

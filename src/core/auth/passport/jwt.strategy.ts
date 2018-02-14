@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Component, Inject } from '@nestjs/common';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component()
 export class JwtStrategy extends Strategy {
@@ -22,6 +22,7 @@ export class JwtStrategy extends Strategy {
         if (!isValid) {
             return done(null, false);
         }
+
         done(null, payload);
     }
 }

@@ -5,9 +5,10 @@ import {Schema, Types} from "mongoose";
 
 export const CampaignSchema = new Schema({
     name: String,
-    code: String,
+    landers: Array,
+    sources: Array,
     user: {
-        type: Schema.Types.ObjectId,
+        type: Number,
         ref: 'User'
     }
 }, { versionKey: false });
