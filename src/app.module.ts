@@ -10,7 +10,7 @@ import {SessionsModule} from "./core/sessions/sessions.module";
 
 @Module({
   imports: [
-      MongooseModule.forRoot('mongodb://192.168.99.100/steer'),
+      MongooseModule.forRoot(process.env.MONGO_URL),
       CommonModule,
       SessionsModule,
       AuthModule,
