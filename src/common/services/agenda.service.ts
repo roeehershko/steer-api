@@ -18,7 +18,6 @@ export class AgendaService {
 
         setTimeout(function () {
             self.agenda.start();
-            console.log('Agenda Started!');
         }, 2000)
     }
 
@@ -28,7 +27,6 @@ export class AgendaService {
 
     public define(name, every, object) {
         this.agenda.define(name, function (job, done) {
-            console.log('Executing!!');
             object.run(done);
         });
 

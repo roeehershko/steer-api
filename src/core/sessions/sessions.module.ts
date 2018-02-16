@@ -8,6 +8,7 @@ import {PendingSessionsSchema} from "./schemas/pending-sessions.schema";
 import {AgendaService} from "../../common/services/agenda.service";
 import {ProcessPendingJob} from "./jobs/process-pending.job";
 import {CampaignsModule} from "../campaigns/campaigns.module";
+import {PendingSessionsEvents} from "./events/pending-sessions.events";
 
 @Module({
     imports: [
@@ -22,14 +23,16 @@ import {CampaignsModule} from "../campaigns/campaigns.module";
         SessionService,
         PendingSessionService,
         AgendaService,
-        ProcessPendingJob
+        ProcessPendingJob,
+        PendingSessionsEvents
     ],
     exports: [ MongooseModule ]
 
 })
 export class SessionsModule {
 
-    public constructor(agendaService: AgendaService, processPendingJob: ProcessPendingJob) {
+    public constructor(agendaService: AgendaService, processPendingJob: ProcessPendingJob, pendingSessionEvents: PendingSessionsEvents) {
         agendaService.define('process pending sessions', '3 seconds', processPendingJob);
+        pendingSessionEvents.run();
     }
 }

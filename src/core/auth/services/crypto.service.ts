@@ -8,8 +8,6 @@ export class CryptoService {
         // generate a salt
         const salt = await bcrypt.genSalt(10);
 
-        console.log('Salt: ');
-        console.log(salt);
         // hash the password along with our new salt
         return await bcrypt.hash(password, salt);
     };

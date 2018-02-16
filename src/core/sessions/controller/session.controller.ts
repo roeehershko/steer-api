@@ -12,9 +12,6 @@ export class SessionController {
 
     @MessagePattern("sessions")
     async sessions(data) {
-        if (data.length)
-            console.log('Received #' + data.length);
-
         this.pendingSessionService.bulk(data)
     }
 }

@@ -20,6 +20,5 @@ export class AuthController {
 
     @Get('authorized')
     public async authorized() {
-        console.log('Authorized route...');
     }
 }

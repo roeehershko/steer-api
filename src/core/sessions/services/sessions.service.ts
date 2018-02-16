@@ -8,7 +8,6 @@ export class SessionService {
     constructor() {}
 
     public async bulk(data: PendingSession[]) {
-        console.log(data);
         // Get campaign event
     }
 }
