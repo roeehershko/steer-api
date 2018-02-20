@@ -16,6 +16,8 @@ export class ProcessPendingJob implements Job {
     ) {}
 
     public async run(done) {
+        console.log('Processing...');
+        done();
         let campaigns = await this.campaignModel.find({ active: 1 }).exec();
         let pendingSessions = await this.pendingSessionModel
             .find().sort({_id: 1}).limit(1000).exec();

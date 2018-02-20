@@ -13,7 +13,7 @@ export class UsersService {
         return await user.save();
     }
 
-    async findAll(): Promise<User[]> {
+    async find(): Promise<User[]> {
         return await this.userModel.find().exec();
     }
 

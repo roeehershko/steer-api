@@ -11,15 +11,13 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get()
-    read(): string {
-        return 'Yo m!';
+    async find() {
+        return await this.usersService.find()
     }
 
     @Get(':id')
-    async readOne(@Param() params, @Request() req) {
-        let user = await this.usersService.findOne(params.id);
-
-        return [];
+    async findOne(@Param() params, @Request() req) {
+        return await this.usersService.findOne(params.id);
     }
 
     @Post()

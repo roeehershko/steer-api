@@ -8,7 +8,6 @@ import {
 
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './passport/jwt.strategy';
-import { AuthController } from './auth.controller';
 import {UserSchema} from "../user/schemas/users";
 import {MongooseModule} from "@nestjs/mongoose";
 import {CryptoService} from "./services/crypto.service";
@@ -16,7 +15,7 @@ import {CryptoService} from "./services/crypto.service";
 @Module({
     imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
     components: [AuthService, JwtStrategy, CryptoService],
-    controllers: [AuthController],
+    exports: [ MongooseModule, AuthService ]
 })
 export class AuthModule implements NestModule {
     public configure(consumer: MiddlewaresConsumer) {

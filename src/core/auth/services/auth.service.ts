@@ -4,7 +4,7 @@ import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {UserSchema} from "../../user/schemas/users";
 import {User} from "../../user/interfaces/user";
-import {CredentialsDto} from "../dto/login.dto";
+import {CredentialsDto} from "../../api/dto/login.dto";
 import {CryptoService} from "./crypto.service";
 
 @Component()
@@ -22,7 +22,7 @@ export class AuthService {
         const isValid = await this.crypto.comparePassword(data.password, user.password);
 
         if (isValid) {
-            const expiresIn = 60 * 60, secretOrKey = 'secret';
+            const expiresIn = 60 * 60 * 1000, secretOrKey = 'secret';
             const token = jwt.sign(data, secretOrKey, { expiresIn });
             return {
                 expires_in: expiresIn,

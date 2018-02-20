@@ -1,7 +1,4 @@
-import * as mongoose from 'mongoose';
-import * as autoIncrement from 'mongoose-auto-increment';
 import {Schema} from "mongoose";
-
 
 export const CampaignSchema = new Schema({
     name: String,
@@ -20,7 +17,8 @@ export const CampaignSchema = new Schema({
             name: String,
             code: String,
             cost: Number,
-            revenue: Number
+            revenue: Number,
+            isDefault: Boolean
         }
     ],
     user: {
@@ -28,3 +26,9 @@ export const CampaignSchema = new Schema({
         ref: 'User'
     }
 }, { versionKey: false });
+
+CampaignSchema.post('update', function() {
+    console.log('SavedLIED');
+    console.log('SavedLIED');
+    console.log('SavedLIED');
+  });

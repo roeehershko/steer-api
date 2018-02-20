@@ -5,36 +5,27 @@ import {CampaignSchema} from "../schemas/campaigns";
 import {Model} from "mongoose";
 import {UserSchema} from "../../user/schemas/users";
 import {User} from "../../user/interfaces/user";
-import {Subject} from "rxjs/Subject";
+import {Client, ClientProxy, Transport} from "@nestjs/microservices";
 
 @Component()
 export class CampaignsService {
+
     constructor(
         @InjectModel(CampaignSchema) private readonly campaignModel: Model<Campaign>,
         @InjectModel(UserSchema) private readonly userModel: Model<User>,
-    ) {}
+    ) {
+    }
 
-    create(data): void {
+    async create(data): Promise<Campaign> {
         const campaign = new this.campaignModel(data);
 
-        campaign.save();
+        return campaign.save();
     }
     async find(): Promise<Campaign[]> {
-        let campaigns = await this.campaignModel.find().exec();
-
-        return campaigns;
+        return await this.campaignModel.find().exec();
     }
 
     async findOne(id: Number): Promise<Campaign> {
         return await this.campaignModel.findById(id).exec();
-    }
-
-    async subscribe(subj: Subject<any>) {
-        const self = this;
-        setTimeout(async function () {
-            let campaigns = await self.campaignModel.find().exec();
-            subj.next(campaigns);
-            subj.unsubscribe();
-        }, 3000);
     }
 }

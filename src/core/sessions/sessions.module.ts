@@ -12,11 +12,11 @@ import {PendingSessionsEvents} from "./events/pending-sessions.events";
 
 @Module({
     imports: [
+        CampaignsModule,
         MongooseModule.forFeature([
             { name: 'Session', schema: SessionsSchema },
             { name: 'PendingSession', schema: PendingSessionsSchema }
-        ]),
-        CampaignsModule
+        ])
     ],
     controllers: [SessionController],
     components: [

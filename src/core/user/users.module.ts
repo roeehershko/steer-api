@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {Global, Module} from '@nestjs/common';
 import {UsersController} from "./users.controller";
 import {MongooseModule} from "@nestjs/mongoose";
 import {UserSchema} from "./schemas/users";
@@ -16,7 +16,6 @@ import {UserEvents} from "./events/user.events";
         CryptoService,
         UserEvents
     ],
-
     exports: [MongooseModule]
 
 })

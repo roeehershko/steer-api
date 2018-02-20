@@ -7,15 +7,17 @@ import {UsersModule} from "./core/user/users.module";
 import * as autoIncrement from 'mongoose-auto-increment';
 import * as mongoose from 'mongoose';
 import {SessionsModule} from "./core/sessions/sessions.module";
+import {ApiModule} from "./core/api/api.module";
 
 @Module({
   imports: [
       MongooseModule.forRoot(process.env.MONGO_URL),
       CommonModule,
-      SessionsModule,
       AuthModule,
+      UsersModule,
       CampaignsModule,
-      UsersModule
+      SessionsModule,
+      ApiModule
   ],
   controllers: [],
   components: [

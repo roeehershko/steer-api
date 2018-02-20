@@ -1,4 +1,4 @@
-import { IsString, IsInt, MinLength, MaxLength, IsNumber } from 'class-validator';
+import { IsString, Min, MinLength, MaxLength, IsNumber } from 'class-validator';
 
 export class CreateCampaignDto {
 
@@ -9,6 +9,6 @@ export class CreateCampaignDto {
 
 
     @IsNumber()
-    @MinLength(0)
+    @Min(0)
     readonly user_id: Number
 }

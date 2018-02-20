@@ -15,8 +15,10 @@ export class UserEvents {
             const user = this;
             // only hash the password if it has been modified (or is new)
             if ( ! user.isModified('password')) return next();
+
             // Encrypt password
-            user.password = await self.crypto.cryptPassword(user.password)
+            user.password = await self.crypto.cryptPassword(user.password);
+            user.created = new Date();
             next();
         });
     }
